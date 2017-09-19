@@ -56,6 +56,7 @@ defmodule Matrix do
   @spec column(matrix :: %Matrix{}, index :: integer) :: list(integer)
   def column(matrix, index) do
     matrix
-    |> Enum.reduce([], fn(x, acc) -> acc ++ [Enum.at(x, index)] end)
+    |> columns
+    |> row(index)
   end
 end
