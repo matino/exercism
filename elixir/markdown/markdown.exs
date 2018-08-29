@@ -19,13 +19,9 @@ defmodule Markdown do
       |> patch_list()
   end
 
-  defp process_line(line) do
-    case String.first(line) do
-      "#" -> process_header(line)
-      "*" -> process_list(line)
-      _ -> process_paragraph(line)
-    end
-  end
+  def process_line("#" <> _ = line), do: process_header(line)
+  def process_line("*" <> _ = line), do: process_list(line)
+  def process_line(line), do: process_paragraph(line)
 
   defp process_header(line) do
     [hashes | text] = String.split(line, " ", parts: 2)
